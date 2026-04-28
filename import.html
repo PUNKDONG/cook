@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>导入订单码</title>
+    <meta name="description" content="把点菜订单码贴进来，还原她点了什么。" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <main class="app-frame import-frame">
+        <header class="hero hero-compact">
+          <div class="hero-copy">
+            <p class="eyebrow">订单导入</p>
+            <h1>看看她点了什么</h1>
+            <p class="subtitle">把复制过来的订单码粘贴进来，静态页面也能直接还原。</p>
+          </div>
+          <a class="link-chip" href="./index.html">返回点单页</a>
+        </header>
+
+        <section class="import-panel">
+          <label class="code-label" for="orderInput">粘贴订单码</label>
+          <textarea
+            id="orderInput"
+            class="code-output editable"
+            rows="6"
+            placeholder="例如：MENU1.eyJ2IjoxLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTI5VDAxOjAwOjAwLjAwMFoiLCJpdGVtcyI6W3siaWQiOiJtaWxrLXRlYS0xIiwicXR5IjoyfV19"
+          ></textarea>
+
+          <div class="import-actions">
+            <button id="parseOrderBtn" class="primary-button" type="button">导入订单</button>
+            <button id="resetOrderBtn" class="secondary-button" type="button">清空内容</button>
+          </div>
+
+          <p id="importHint" class="hint-text"></p>
+        </section>
+
+        <section id="resultPanel" class="result-panel hidden">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">还原结果</p>
+              <h2>订单明细</h2>
+            </div>
+            <span id="resultMeta" class="result-meta"></span>
+          </div>
+
+          <div id="resultSummary" class="result-summary"></div>
+          <div id="resultGroups" class="result-groups"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./import.js"></script>
+  </body>
+</html>

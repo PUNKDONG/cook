@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>今天想点什么</title>
+    <meta
+      name="description"
+      content="一个静态点菜小网页，支持分类、购物车、订单码生成与导入。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <main class="app-frame">
+        <header class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">今天也可以随便点</p>
+            <h1>今天想吃什么</h1>
+            <p class="subtitle">奶茶、蛋糕、牛肉、礼物，都可以先加进购物车。</p>
+          </div>
+          <a class="link-chip" href="./import.html">导入订单码</a>
+        </header>
+
+        <section class="quick-strip" aria-label="温柔提醒">
+          <article class="quick-card">
+            <span class="quick-title">静态网页</span>
+            <span class="quick-note">不用登录，不接支付</span>
+          </article>
+          <article class="quick-card">
+            <span class="quick-title">购物车体验</span>
+            <span class="quick-note">和点单小程序一样可加购</span>
+          </article>
+          <article class="quick-card">
+            <span class="quick-title">订单码</span>
+            <span class="quick-note">选完直接复制给你</span>
+          </article>
+        </section>
+
+        <section class="category-section">
+          <div id="categoryTabs" class="category-tabs" role="tablist" aria-label="商品分类"></div>
+        </section>
+
+        <section class="menu-panel">
+          <div class="section-heading">
+            <div>
+              <p id="categoryLabel" class="section-kicker"></p>
+              <h2 id="categoryTitle"></h2>
+            </div>
+            <button id="clearCartBtn" class="text-button" type="button">清空购物车</button>
+          </div>
+          <div id="menuGrid" class="menu-grid" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <button id="cartFab" class="cart-fab" type="button" aria-haspopup="dialog" aria-expanded="false">
+      <span class="cart-copy">
+        <strong id="cartCount">0</strong>
+        <span>已选</span>
+      </span>
+      <span class="cart-copy cart-copy-right">
+        <strong id="cartSummary">还没点单</strong>
+        <span>打开购物车</span>
+      </span>
+    </button>
+
+    <div id="cartDrawer" class="cart-drawer" aria-hidden="true">
+      <div id="drawerBackdrop" class="drawer-backdrop"></div>
+      <section class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+        <header class="drawer-header">
+          <div>
+            <p class="section-kicker">购物车</p>
+            <h2 id="drawerTitle">本次想点的东西</h2>
+          </div>
+          <button id="closeDrawerBtn" class="icon-button" type="button" aria-label="关闭购物车">x</button>
+        </header>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <footer class="drawer-footer">
+          <div class="footer-copy">
+            <strong id="footerCount">0 件商品</strong>
+            <span>生成订单码后复制给你自己保存</span>
+          </div>
+          <div class="footer-actions">
+            <button id="copyOrderBtn" class="primary-button" type="button">生成订单码</button>
+          </div>
+          <label class="code-label" for="orderCodeOutput">订单码</label>
+          <textarea
+            id="orderCodeOutput"
+            class="code-output"
+            rows="4"
+            readonly
+            placeholder="选完商品后，这里会生成一串可复制的订单码。"
+          ></textarea>
+          <p id="copyHint" class="hint-text"></p>
+        </footer>
+      </section>
+    </div>
+
+    <template id="menuItemTemplate">
+      <article class="menu-card">
+        <div class="menu-image">
+          <span class="menu-image-badge">图片预留</span>
+        </div>
+        <div class="menu-body">
+          <div class="menu-topline">
+            <span class="menu-tag"></span>
+            <span class="menu-selected"></span>
+          </div>
+          <h3 class="menu-name"></h3>
+          <p class="menu-description"></p>
+          <div class="menu-actions">
+            <button class="qty-button minus-button" type="button" aria-label="减少数量">-</button>
+            <span class="qty-value">0</span>
+            <button class="qty-button plus-button" type="button" aria-label="增加数量">+</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <template id="cartItemTemplate">
+      <article class="cart-item">
+        <div class="cart-item-copy">
+          <span class="cart-item-category"></span>
+          <h3 class="cart-item-name"></h3>
+        </div>
+        <div class="menu-actions cart-actions">
+          <button class="qty-button minus-button" type="button" aria-label="减少数量">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-button plus-button" type="button" aria-label="增加数量">+</button>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
