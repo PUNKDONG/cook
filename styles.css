@@ -172,12 +172,17 @@ a {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.category-rail::-webkit-scrollbar {
+  display: none;
 }
 
 .category-tabs {
   display: grid;
   gap: 0;
-  padding: 0 0 88px;
+  padding: 0 0 78px;
 }
 
 .category-tab {
@@ -221,6 +226,11 @@ a {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.menu-panel::-webkit-scrollbar {
+  display: none;
 }
 
 .import-panel,
@@ -250,7 +260,7 @@ a {
 }
 
 .menu-grid {
-  padding-bottom: 92px;
+  padding-bottom: 118px;
 }
 
 .menu-card,
