@@ -141,7 +141,7 @@ a {
 
 .store-copy {
   display: grid;
-  gap: 4px;
+  gap: 0;
 }
 
 .store-copy strong {
@@ -500,6 +500,7 @@ a {
   gap: 10px;
   overflow-y: auto;
   min-height: 160px;
+  padding-bottom: 16px;
 }
 
 .cart-item {
@@ -531,9 +532,15 @@ a {
   gap: 12px;
 }
 
+.drawer-footer {
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, #ffffff 24%);
+}
+
 .footer-copy {
   display: grid;
-  gap: 4px;
+  gap: 0;
 }
 
 .footer-copy strong,
@@ -570,8 +577,9 @@ a {
 
 .order-result-card {
   display: grid;
-  gap: 10px;
-  padding: 14px 12px;
+  gap: 8px;
+  margin-top: 2px;
+  padding: 12px;
   border-radius: 16px;
   background: var(--surface-alt);
   border: 1px solid var(--border);
@@ -589,12 +597,17 @@ a {
 
 .code-output {
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
   resize: vertical;
+}
+
+.code-output-compact {
+  min-height: 88px;
+  max-height: 110px;
 }
 
 .code-output.editable {
