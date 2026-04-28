@@ -32,6 +32,7 @@ body {
 
 body {
   padding: 0 0 calc(98px + env(safe-area-inset-bottom));
+  overflow: hidden;
 }
 
 button,
@@ -58,8 +59,12 @@ a {
 
 .app-frame {
   width: var(--phone-width);
+  height: calc(100dvh - 58px - env(safe-area-inset-bottom));
   min-height: 100vh;
   background: var(--surface);
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  overflow: hidden;
 }
 
 .import-frame {
@@ -156,13 +161,16 @@ a {
 .order-layout {
   display: grid;
   grid-template-columns: 94px minmax(0, 1fr);
-  min-height: calc(100vh - 206px);
+  min-height: 0;
   background: #f5f5f5;
+  overflow: hidden;
 }
 
 .category-rail {
   background: #f0f0f0;
   border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .category-tabs {
@@ -209,6 +217,8 @@ a {
 .menu-panel {
   background: var(--surface);
   padding: 12px 10px 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .import-panel,
@@ -696,6 +706,7 @@ a {
   }
 
   .app-frame {
+    height: calc(100dvh - 90px);
     min-height: calc(100vh - 32px);
     margin-top: 16px;
     border-radius: 20px;
