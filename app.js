@@ -21,8 +21,10 @@ const elements = {
   cartItems: document.querySelector("#cartItems"),
   cartCount: document.querySelector("#cartCount"),
   cartSummary: document.querySelector("#cartSummary"),
+  cartMeta: document.querySelector("#cartMeta"),
   footerCount: document.querySelector("#footerCount"),
   copyOrderBtn: document.querySelector("#copyOrderBtn"),
+  orderResultCard: document.querySelector("#orderResultCard"),
   orderCodeOutput: document.querySelector("#orderCodeOutput"),
   copyHint: document.querySelector("#copyHint"),
   menuItemTemplate: document.querySelector("#menuItemTemplate"),
@@ -51,6 +53,7 @@ function bindEvents() {
 
     const code = buildOrderCode();
     elements.orderCodeOutput.value = code;
+    elements.orderResultCard.classList.remove("hidden");
 
     try {
       if (navigator.clipboard?.writeText) {
@@ -173,6 +176,8 @@ function updateQuantity(itemId, delta) {
 
 function syncCart() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.cart));
+  elements.orderResultCard.classList.add("hidden");
+  elements.orderCodeOutput.value = "";
   renderMenu();
   renderCart();
   updateCartSummary();
@@ -182,7 +187,8 @@ function updateCartSummary() {
   const totalCount = getTotalCount();
   elements.cartCount.textContent = String(totalCount);
   elements.footerCount.textContent = `${totalCount} 件商品`;
-  elements.cartSummary.textContent = totalCount > 0 ? `${totalCount} 件已加入购物车` : "还没点单";
+  elements.cartSummary.textContent = totalCount > 0 ? `已选 ${totalCount} 件商品` : "购物车还是空的";
+  elements.cartMeta.textContent = totalCount > 0 ? "点这里确认并生成订单码" : "先选商品，再去结算";
 }
 
 function getTotalCount() {

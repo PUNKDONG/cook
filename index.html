@@ -13,56 +13,48 @@
   <body>
     <div class="page-shell">
       <main class="app-frame">
-        <header class="hero">
+        <header class="hero hero-order">
           <div class="hero-copy">
-            <p class="eyebrow">今天也可以随便点</p>
+            <p class="eyebrow">点单专区</p>
             <h1>今天想吃什么</h1>
-            <p class="subtitle">奶茶、蛋糕、牛肉、礼物，都可以先加进购物车。</p>
+            <p class="subtitle">左边选分类，右边加购。选完后统一去购物车确认。</p>
           </div>
-          <a class="link-chip" href="./import.html">导入订单码</a>
+          <a class="link-chip" href="./import.html">导入订单</a>
         </header>
 
-        <section class="quick-strip" aria-label="温柔提醒">
-          <article class="quick-card">
-            <span class="quick-title">静态网页</span>
-            <span class="quick-note">不用登录，不接支付</span>
-          </article>
-          <article class="quick-card">
-            <span class="quick-title">购物车体验</span>
-            <span class="quick-note">和点单小程序一样可加购</span>
-          </article>
-          <article class="quick-card">
-            <span class="quick-title">订单码</span>
-            <span class="quick-note">选完直接复制给你</span>
-          </article>
-        </section>
-
-        <section class="category-section">
-          <div id="categoryTabs" class="category-tabs" role="tablist" aria-label="商品分类"></div>
-        </section>
-
-        <section class="menu-panel">
-          <div class="section-heading">
-            <div>
-              <p id="categoryLabel" class="section-kicker"></p>
-              <h2 id="categoryTitle"></h2>
-            </div>
-            <button id="clearCartBtn" class="text-button" type="button">清空购物车</button>
+        <section class="store-summary">
+          <div class="store-copy">
+            <strong>今日点单</strong>
+            <span>像外卖点餐一样直接选，先加购再提交。</span>
           </div>
-          <div id="menuGrid" class="menu-grid" aria-live="polite"></div>
+          <button id="clearCartBtn" class="text-button" type="button">清空</button>
+        </section>
+
+        <section class="order-layout">
+          <aside class="category-rail">
+            <div id="categoryTabs" class="category-tabs" role="tablist" aria-label="商品分类"></div>
+          </aside>
+
+          <section class="menu-panel">
+            <div class="section-heading section-heading-compact">
+              <div>
+                <p id="categoryLabel" class="section-kicker"></p>
+                <h2 id="categoryTitle"></h2>
+              </div>
+            </div>
+            <div id="menuGrid" class="menu-grid" aria-live="polite"></div>
+          </section>
         </section>
       </main>
     </div>
 
     <button id="cartFab" class="cart-fab" type="button" aria-haspopup="dialog" aria-expanded="false">
+      <span class="cart-badge" id="cartCount">0</span>
       <span class="cart-copy">
-        <strong id="cartCount">0</strong>
-        <span>已选</span>
+        <strong id="cartSummary">购物车还是空的</strong>
+        <span id="cartMeta">先选商品，再去结算</span>
       </span>
-      <span class="cart-copy cart-copy-right">
-        <strong id="cartSummary">还没点单</strong>
-        <span>打开购物车</span>
-      </span>
+      <span class="cart-submit">去结算</span>
     </button>
 
     <div id="cartDrawer" class="cart-drawer" aria-hidden="true">
@@ -71,7 +63,7 @@
         <header class="drawer-header">
           <div>
             <p class="section-kicker">购物车</p>
-            <h2 id="drawerTitle">本次想点的东西</h2>
+            <h2 id="drawerTitle">确认本次点单</h2>
           </div>
           <button id="closeDrawerBtn" class="icon-button" type="button" aria-label="关闭购物车">x</button>
         </header>
@@ -79,21 +71,29 @@
         <div id="cartItems" class="cart-items"></div>
 
         <footer class="drawer-footer">
-          <div class="footer-copy">
+          <div class="footer-copy footer-copy-compact">
             <strong id="footerCount">0 件商品</strong>
-            <span>生成订单码后复制给你自己保存</span>
+            <span>确认无误后生成订单码，再复制给你自己。</span>
           </div>
           <div class="footer-actions">
-            <button id="copyOrderBtn" class="primary-button" type="button">生成订单码</button>
+            <button id="copyOrderBtn" class="primary-button" type="button">确认并生成订单</button>
           </div>
-          <label class="code-label" for="orderCodeOutput">订单码</label>
-          <textarea
-            id="orderCodeOutput"
-            class="code-output"
-            rows="4"
-            readonly
-            placeholder="选完商品后，这里会生成一串可复制的订单码。"
-          ></textarea>
+          <section id="orderResultCard" class="order-result-card hidden">
+            <div class="order-result-head">
+              <div>
+                <p class="section-kicker">订单已生成</p>
+                <h3>复制这串订单码</h3>
+              </div>
+            </div>
+            <label class="code-label" for="orderCodeOutput">订单码</label>
+            <textarea
+              id="orderCodeOutput"
+              class="code-output"
+              rows="4"
+              readonly
+              placeholder="选完商品后，这里会生成一串可复制的订单码。"
+            ></textarea>
+          </section>
           <p id="copyHint" class="hint-text"></p>
         </footer>
       </section>
@@ -102,15 +102,15 @@
     <template id="menuItemTemplate">
       <article class="menu-card">
         <div class="menu-image">
-          <span class="menu-image-badge">图片预留</span>
+          <span class="menu-image-badge">待放图片</span>
         </div>
         <div class="menu-body">
           <div class="menu-topline">
             <span class="menu-tag"></span>
-            <span class="menu-selected"></span>
           </div>
           <h3 class="menu-name"></h3>
           <p class="menu-description"></p>
+          <span class="menu-selected"></span>
           <div class="menu-actions">
             <button class="qty-button minus-button" type="button" aria-label="减少数量">-</button>
             <span class="qty-value">0</span>
