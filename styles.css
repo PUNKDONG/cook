@@ -15,6 +15,9 @@
   --danger: #ff5b3d;
   --shadow: 0 12px 28px rgba(31, 35, 41, 0.08);
   --phone-width: min(100vw, 430px);
+  --cart-bar-height: calc(58px + env(safe-area-inset-bottom));
+  --category-item-height: 78px;
+  --menu-item-buffer: 118px;
 }
 
 * {
@@ -182,7 +185,7 @@ a {
 .category-tabs {
   display: grid;
   gap: 0;
-  padding: 0 0 118px;
+  padding: 0 0 calc(var(--cart-bar-height) + (var(--category-item-height) * 2));
 }
 
 .category-tab {
@@ -260,7 +263,7 @@ a {
 }
 
 .menu-grid {
-  padding-bottom: 118px;
+  padding-bottom: calc(var(--cart-bar-height) + var(--menu-item-buffer));
 }
 
 .menu-card,
