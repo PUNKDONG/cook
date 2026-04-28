@@ -118,12 +118,27 @@ function renderMenu() {
   items.forEach((item) => {
     const node = elements.menuItemTemplate.content.firstElementChild.cloneNode(true);
     const quantity = state.cart[item.id] ?? 0;
+    const imageWrap = node.querySelector(".menu-image");
+    const image = node.querySelector(".menu-photo");
+    const imageBadge = node.querySelector(".menu-image-badge");
 
     node.querySelector(".menu-tag").textContent = item.tag;
     node.querySelector(".menu-selected").textContent = quantity > 0 ? `已选 ${quantity}` : "可加购";
     node.querySelector(".menu-name").textContent = item.name;
     node.querySelector(".menu-description").textContent = item.description;
     node.querySelector(".qty-value").textContent = quantity;
+
+    if (item.image) {
+      image.src = item.image;
+      image.alt = item.name;
+      imageWrap.classList.add("has-image");
+      imageBadge.hidden = true;
+    } else {
+      image.removeAttribute("src");
+      image.alt = "";
+      imageWrap.classList.remove("has-image");
+      imageBadge.hidden = false;
+    }
 
     node.querySelector(".minus-button").addEventListener("click", () => updateQuantity(item.id, -1));
     node.querySelector(".plus-button").addEventListener("click", () => updateQuantity(item.id, 1));
