@@ -38,6 +38,11 @@ body {
   overflow: hidden;
 }
 
+body.import-page {
+  overflow: auto;
+  padding: 0;
+}
+
 button,
 textarea,
 a {
@@ -71,9 +76,12 @@ a {
 }
 
 .import-frame {
+  height: auto;
   min-height: 100vh;
   background: var(--bg);
   padding: 20px 16px 28px;
+  display: block;
+  overflow: visible;
 }
 
 .hero {
